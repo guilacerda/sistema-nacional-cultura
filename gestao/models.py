@@ -14,13 +14,15 @@ TIPOS_DILIGENCIA = (
 
 class Diligencia(models.Model):
     texto_diligencia = models.TextField(max_length=200)
-    classificacao_arquivo = models.ForeignKey('planotrabalho.SituacoesArquivoPlano', null=True, blank=True)
+    classificacao_arquivo = models.ForeignKey('planotrabalho.SituacoesArquivoPlano',
+                                              on_delete=models.CASCADE,
+                                              null=True, blank=True)
     data_criacao = models.DateField(default=datetime.date.today)
-    ente_federado = models.ForeignKey(Municipio)
-    componente_type = models.ForeignKey(ContentType)
+    ente_federado = models.ForeignKey(Municipio, on_delete=models.CASCADE)
+    componente_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     componente_id = models.PositiveIntegerField()
     componente = GenericForeignKey('componente_type', 'componente_id')
-    usuario = models.ForeignKey(Usuario)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     tipo_diligencia = models.CharField(
             max_length=10,
             choices=TIPOS_DILIGENCIA)
