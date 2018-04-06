@@ -1,4 +1,4 @@
-﻿from django.db import models
+from django.db import models
 from django.contrib.auth.models import User
 
 from smart_selects.db_fields import ChainedForeignKey
@@ -30,7 +30,9 @@ class Uf(models.Model):
 
 class Cidade(models.Model):
     codigo_ibge = models.IntegerField(unique=True)
-    uf = models.ForeignKey('Uf', to_field='codigo_ibge')
+    uf = models.ForeignKey('Uf',
+        to_field='codigo_ibge',
+        on_delete=models.CASCADE)
     nome_municipio = models.CharField(max_length=100)
     lat = models.FloatField()
     lng = models.FloatField()
@@ -54,12 +56,14 @@ class Municipio(models.Model):
         verbose_name='CNPJ')
     rg_prefeito = models.CharField(max_length=50, verbose_name='RG')
     orgao_expeditor_rg = models.CharField(max_length=50)
-    estado_expeditor = models.ForeignKey('Uf', related_name='estado_expeditor')
+    estado_expeditor = models.ForeignKey('Uf', 
+                                         related_name='estado_expeditor',
+                                         on_delete=models.CASCADE)
     endereco = models.CharField(max_length=255)
     complemento = models.CharField(max_length=255)
     cep = models.CharField(max_length=10)
     bairro = models.CharField(max_length=50)
-    estado = models.ForeignKey('Uf')
+    estado = models.ForeignKey('Uf', on_delete=models.CASCADE)
     cidade = ChainedForeignKey(
         Cidade,
         chained_field='estado',
@@ -103,7 +107,7 @@ class Responsavel(models.Model):
         verbose_name='CPF')
     rg_responsavel = models.CharField(max_length=25, verbose_name='RG')
     orgao_expeditor_rg = models.CharField(max_length=50)
-    estado_expeditor = models.ForeignKey('Uf')
+    estado_expeditor = models.ForeignKey('Uf', on_delete=models.CASCADE)
     nome_responsavel = models.CharField(max_length=100)
     cargo_responsavel = models.CharField(max_length=100)
     instituicao_responsavel = models.CharField(max_length=100)
@@ -122,7 +126,7 @@ class Secretario(models.Model):
         verbose_name='CPF')
     rg_secretario = models.CharField(max_length=25, verbose_name='RG')
     orgao_expeditor_rg = models.CharField(max_length=50)
-    estado_expeditor = models.ForeignKey('Uf')
+    estado_expeditor = models.ForeignKey('Uf', on_delete=models.CASCADE)
     nome_secretario = models.CharField(max_length=100)
     cargo_secretario = models.CharField(max_length=100)
     instituicao_secretario = models.CharField(max_length=100)
@@ -136,13 +140,17 @@ class Secretario(models.Model):
 
 
 class Usuario(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     nome_usuario = models.CharField(max_length=100)
-    municipio = models.OneToOneField('Municipio', blank=True, null=True)
-    responsavel = models.OneToOneField('Responsavel', blank=True, null=True)
-    secretario = models.OneToOneField('Secretario', blank=True, null=True)
+    municipio = models.OneToOneField('Municipio', on_delete=models.CASCADE,
+                                     blank=True, null=True)
+    responsavel = models.OneToOneField('Responsavel', on_delete=models.CASCADE,
+                                       blank=True, null=True)
+    secretario = models.OneToOneField('Secretario', on_delete=models.CASCADE,
+                                      blank=True, null=True)
     plano_trabalho = models.OneToOneField(
         'planotrabalho.PlanoTrabalho',
+        on_delete=models.CASCADE,
         blank=True,
         null=True)
     estado_processo = models.CharField(
@@ -159,7 +167,7 @@ class Usuario(models.Model):
 
 
 class Historico(models.Model):
-    usuario = models.ForeignKey('Usuario')
+    usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
     situacao = models.CharField(
         max_length=1,
         choices=LISTA_ESTADOS_PROCESSO,
