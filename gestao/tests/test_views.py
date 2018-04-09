@@ -1,11 +1,11 @@
 import pytest
 import datetime
 
-from django.core.urlresolvers import resolve
-from django.core.urlresolvers import reverse
+from django.urls import resolve
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.contrib.auth.models import User
 from django.core import mail
+
 from model_mommy import mommy
 
 from gestao.forms import DiligenciaForm

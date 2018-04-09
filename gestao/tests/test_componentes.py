@@ -1,8 +1,10 @@
 import pytest
 
-from django.template import Context, Template, Engine
-from django.template.base import TemplateDoesNotExist
-from django.core.urlresolvers import reverse
+from django.template import Context
+from django.template import Engine
+from django.template import Template
+from django.template import TemplateDoesNotExist
+from django.urls import reverse
 
 from planotrabalho.models import SituacoesArquivoPlano
 from gestao.forms import DiligenciaForm
