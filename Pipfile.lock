@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3dcdb5dd1e41692274c86b3134ca8dfc2373d638a41e71b5ee1652a12a03e7d3"
+            "sha256": "5682ae15776cad325fefa591f640539c07255f47b1f52aeed5b999a9530118f1"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -62,19 +62,19 @@
             "index": "pypi",
             "version": "==2.0.4"
         },
+        "django-autocomplete-light": {
+            "hashes": [
+                "sha256:5ccb1c8c4b75cf72bc5dabd920190ea1ca3a340f56fb6b12d07a62202837fa75"
+            ],
+            "index": "pypi",
+            "version": "==3.2.10"
+        },
         "django-ckeditor": {
             "hashes": [
                 "sha256:b49eb630a260eb17dd225ea38b42d58fabc9a8dbbc898224c61f9a570c29e961"
             ],
             "index": "pypi",
             "version": "==5.4.0"
-        },
-        "django-clever-selects": {
-            "hashes": [
-                "sha256:7b149a00fb1f33f4659601463b610b3087e5ef9e370bcfe51df424266858ac81"
-            ],
-            "index": "pypi",
-            "version": "==0.8.2"
         },
         "django-cors-headers": {
             "hashes": [
