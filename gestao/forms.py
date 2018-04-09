@@ -1,4 +1,5 @@
 from threading import Thread
+
 from django import forms
 from django.core.mail import send_mail
 from django.forms import ModelForm
@@ -12,12 +13,12 @@ from planotrabalho.models import PlanoCultura, OrgaoGestor, ConselhoCultural
 from planotrabalho.models import SituacoesArquivoPlano
 from gestao.models import Diligencia
 
-from .utils import enviar_email_alteracao_situacao
-
 from ckeditor.widgets import CKEditorWidget
 
 from clever_selects.form_fields import ChainedChoiceField
 from clever_selects.forms import ChainedChoicesForm
+
+from .utils import enviar_email_alteracao_situacao
 
 
 content_types = [
