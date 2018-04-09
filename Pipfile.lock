@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9b27a37a2c8db8c1e8803dfc9f36ee88b7148325bd6907746464f512785dc7dd"
+            "sha256": "3dcdb5dd1e41692274c86b3134ca8dfc2373d638a41e71b5ee1652a12a03e7d3"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -64,10 +64,10 @@
         },
         "django-ckeditor": {
             "hashes": [
-                "sha256:30971615b80161443117c02951f08bb48ecac82de2dbf1a13a638ee4e526173f"
+                "sha256:b49eb630a260eb17dd225ea38b42d58fabc9a8dbbc898224c61f9a570c29e961"
             ],
             "index": "pypi",
-            "version": "==4.5.1"
+            "version": "==5.4.0"
         },
         "django-clever-selects": {
             "hashes": [
@@ -99,6 +99,13 @@
             ],
             "index": "pypi",
             "version": "==1.1.0"
+        },
+        "django-js-asset": {
+            "hashes": [
+                "sha256:38fc1de7a93a2f667fe7ee34acc53d682bac5ce6c73ac6f0ecb4ff77d0f61f1b",
+                "sha256:bcd00d7dc67f86cad1dac4bf7b43fa4b75088c214d2c92002b8705c6a7362e7e"
+            ],
+            "version": "==1.0.0"
         },
         "django-localflavor": {
             "hashes": [
