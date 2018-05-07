@@ -44,6 +44,8 @@ DJANGO_APPS = (
 
     # Useful template tags:
     # 'django.contrib.humanize',
+    'dal',
+    'dal_select2',
 
     # Admin
     'django.contrib.admin',
@@ -56,8 +58,6 @@ THIRD_PARTY_APPS = (
     'django_extensions',
     'ckeditor',
     'widget_tweaks',
-    # 'piwik',
-    'clever_selects',
     'rest_framework',
     'django_filters',
     'drf_hal_json',
@@ -98,7 +98,7 @@ REST_FRAMEWORK = {
 
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     # Make sure djangosecure.middleware.SecurityMiddleware is listed first
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
