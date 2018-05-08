@@ -2,6 +2,7 @@ import pytest
 import datetime
 
 from django.urls import resolve
+from django.urls import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.contrib.auth.models import User
 from django.core import mail
@@ -542,4 +543,17 @@ def test_envio_email_diligencia_geral(url, client, plano_trabalho, situacoes, lo
     redirect_url = client.get(request.url)
 
     assert len(mail.outbox) == 1
+
+
+@pytest.mark.skip
+def test_filtra_as_cidades_de_acordo_com_o_estado(client):
+    """
+    Testa se os municipios estão sendo filtrados por um estado numa chamada
+    ajax.
+    """
+
+    url = reverse('gestao:municipio_chain')
+
+    request = client.post(url, data={'q': 'ac'})
+    __import__('ipdb').set_trace()
 

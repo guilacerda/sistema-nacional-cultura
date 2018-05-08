@@ -1,34 +1,68 @@
+import os
+
 from threading import Thread
 
-from django.shortcuts import redirect, render, get_object_or_404
-from django.http import Http404, JsonResponse, HttpResponseRedirect
-from django.db.models import Q
-from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
-from django.views.generic.edit import FormView, UpdateView
+from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.mail import send_mail
 
-from adesao.models import Usuario, Cidade, Municipio, Historico
-from planotrabalho.models import PlanoTrabalho, CriacaoSistema, PlanoCultura, FundoCultura, OrgaoGestor, ConselhoCultural, SituacoesArquivoPlano
+from django.db.models import Q
+
+from django.shortcuts import redirect
+from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+
+from django.http import Http404, JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse
+from django.http import HttpResponseRedirect
+
+from django.contrib.auth.models import User
+
+from django.views.generic import CreateView
+from django.views.generic import DetailView
+from django.views.generic import ListView
+
+from django.views.generic.edit import FormView
+from django.views.generic.edit import UpdateView
+
+from django.urls import reverse_lazy
+
+from adesao.models import Usuario
+from adesao.models import Cidade
+from adesao.models import Municipio
+from adesao.models import Historico
+
+from planotrabalho.models import PlanoTrabalho
+from planotrabalho.models import CriacaoSistema
+from planotrabalho.models import PlanoCultura
+from planotrabalho.models import FundoCultura
+from planotrabalho.models import OrgaoGestor
+from planotrabalho.models import ConselhoCultural
+from planotrabalho.models import SituacoesArquivoPlano
+
 from gestao.utils import enviar_email_aprovacao_plano
 
-from .forms import AlterarSituacao, DiligenciaForm, AlterarDocumentosEnteFederadoForm
-from .forms import AlterarCadastradorForm, AlterarUsuarioForm, AlterarOrgaoForm
-from .forms import AlterarFundoForm, AlterarPlanoForm, AlterarConselhoForm, AlterarSistemaForm
+from .forms import AlterarSituacao
+from .forms import DiligenciaForm
+from .forms import AlterarDocumentosEnteFederadoForm
 
-from clever_selects.views import ChainedSelectChoicesView
+# from .forms import AlterarCadastradorForm
+from .forms import AlterarUsuarioForm
+from .forms import AlterarOrgaoForm
 
-import os
-from django.conf import settings
+from .forms import AlterarFundoForm
+from .forms import AlterarPlanoForm
+from .forms import AlterarConselhoForm
+from .forms import AlterarSistemaForm
 
+from dal import autocomplete
 
 # Acompanhamento das adesões
 
+
 class AlterarCadastrador(FormView):
     template_name = 'gestao/alterar_cadastrador.html'
-    form_class = AlterarCadastradorForm
+    # form_class = AlterarCadastradorForm
     success_url = reverse_lazy('gestao:acompanhar_adesao')
 
     def form_valid(self, form):
@@ -38,7 +72,7 @@ class AlterarCadastrador(FormView):
 
 class AlterarCadastradorEstado(FormView):
     template_name = 'gestao/alterar_cadastrador_estado.html'
-    form_class = AlterarCadastradorForm
+    # form_class = AlterarCadastradorForm
     success_url = reverse_lazy('gestao:acompanhar_adesao')
 
     def form_valid(self, form):
@@ -46,13 +80,20 @@ class AlterarCadastradorEstado(FormView):
         return super(AlterarCadastradorEstado, self).form_valid(form)
 
 
-class MunicipioChain(ChainedSelectChoicesView):
-    def get_choices(self):
-        data = Cidade.objects.filter(uf=self.parent_value)
-        choices = []
-        for cidade in data:
-            choices.append((str(cidade.id), cidade.nome_municipio))
-        return choices
+# class MunicipioChain(ChainedSelectChoicesView):
+#     def get_choices(self):
+#         data = Cidade.objects.filter(uf=self.parent_value)
+#         choices = []
+#         for cidade in data:
+#             choices.append((str(cidade.id), cidade.nome_municipio))
+#         return choices
+
+class MunicipioAutoComplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = Cidade.objects.all()
+
+        if self.q:
+            qs = qs.filter()
 
 
 def alterar_situacao(request, id):
