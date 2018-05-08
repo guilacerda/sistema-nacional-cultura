@@ -4,7 +4,8 @@
 <head>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Sistema Nacional de Cultura</title>
-  {% load staticfiles %} {% load piwik_tags %}
+  <!-- {% load staticfiles %} {% load piwik_tags %} -->
+  {% load staticfiles %}
   <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
   <link rel="apple-touch-icon" href="{% static 'img/touch_icon.png' %}">
 
@@ -255,7 +256,6 @@
       });
     </script>
     {% endverbatim %}
-    {% tracking_code %}
     <!-- Script da Barra do Governo -->
     <script defer src="http://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
 </body>
