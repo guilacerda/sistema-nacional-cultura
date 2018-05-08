@@ -2,6 +2,7 @@ import csv
 import xlwt
 import xlsxwriter
 import environ
+
 from io import BytesIO
 from datetime import timedelta
 from threading import Thread
@@ -10,7 +11,7 @@ from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView, DetailView
-from django.core.urlresolvers import reverse_lazy, reverse
+from django.urls import reverse_lazy, reverse
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone

@@ -73,7 +73,7 @@ def testa_template_em_esqueceu_senha(client):
 
     response = client.get('/password_reset/')
 
-    assert response.template_name == 'registration/password_reset_form.html' 
+    assert response.template_name[0] == 'registration/password_reset_form.html'
 
     # Pelo fato de o template padrão do django ter esse mesmo nome fizemos uma validação a mais
     assert "Sistema Nacional de Cultura"  in response.rendered_content

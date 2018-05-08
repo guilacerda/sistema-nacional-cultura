@@ -1,17 +1,22 @@
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
 
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LogoutView
+
 from . import views
 
+
+app_name = "adesao"
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^sucesso-cadastro-usuario/$',
         views.sucesso_usuario,
         name='sucesso_usuario'),
-    url(r'^login/$', 'django.contrib.auth.views.login',
+    url(r'^login/$', LoginView.as_view(),
         {'template_name': 'index.html'}, name='login'),
-    url(r'^sair/$', 'django.contrib.auth.views.logout',
+    url(r'^sair/$', LogoutView.as_view(),
         {'template_name': 'index.html'}, name='logout'),
     url(r'^ativar/usuario/(?P<codigo>[\w]+)/$',
         views.ativar_usuario, name='ativar_usuario'),
