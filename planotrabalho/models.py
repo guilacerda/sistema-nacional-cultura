@@ -107,7 +107,8 @@ class ConselhoCultural(ArquivoComponente):
     diligencias = GenericRelation(Diligencia, content_type_field="componente_type",
                                   object_id_field="componente_id")
     situacao_ata = models.ForeignKey('SituacoesArquivoPlano',
-                                     on_delete=models.CASCADE)
+                                     on_delete=models.CASCADE,
+                                    blank=True, null=True)
 
 
 class FundoCultura(ArquivoComponente):

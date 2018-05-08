@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from . import views
 
+app_name = 'planotrabalho'
 
 urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/$',

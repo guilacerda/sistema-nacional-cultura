@@ -2,15 +2,30 @@ import json
 
 
 from django.shortcuts import redirect
-from django.http import Http404, HttpResponse
-from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic import ListView, DetailView
-from django.core.urlresolvers import reverse_lazy
+from django.http import Http404
+from django.http import HttpResponse
+from django.views.generic.edit import CreateView
+from django.views.generic.edit import UpdateView
+from django.views.generic import ListView
+from django.views.generic import DetailView
+from django.urls import reverse_lazy
 
-from planotrabalho.models import PlanoTrabalho, CriacaoSistema, OrgaoGestor, Conselheiro
-from planotrabalho.models import ConselhoCultural, FundoCultura, PlanoCultura
-from .forms import CriarSistemaForm, OrgaoGestorForm, ConselhoCulturalForm, DesabilitarConselheiroForm
-from .forms import FundoCulturaForm, PlanoCulturaForm, CriarConselheiroForm, AlterarConselheiroForm
+from .models import PlanoTrabalho
+from .models import CriacaoSistema
+from .models import OrgaoGestor
+from .models import Conselheiro
+from .models import ConselhoCultural
+from .models import FundoCultura
+from .models import PlanoCultura
+
+from .forms import CriarSistemaForm
+from .forms import OrgaoGestorForm
+from .forms import ConselhoCulturalForm
+from .forms import DesabilitarConselheiroForm
+from .forms import FundoCulturaForm
+from .forms import PlanoCulturaForm
+from .forms import CriarConselheiroForm
+from .forms import AlterarConselheiroForm
 
 
 class PlanoTrabalho(DetailView):
