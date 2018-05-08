@@ -545,15 +545,11 @@ def test_envio_email_diligencia_geral(url, client, plano_trabalho, situacoes, lo
     assert len(mail.outbox) == 1
 
 
-@pytest.mark.skip
-def test_filtra_as_cidades_de_acordo_com_o_estado(client):
-    """
-    Testa se os municipios estão sendo filtrados por um estado numa chamada
-    ajax.
+def test_filtra_municipios_form_altera_cadastrador(client):
+    """ Testa se MunicipiosChain está retornando os municipios quando uma UF
+    é informada
     """
 
     url = reverse('gestao:municipio_chain')
 
-    request = client.post(url, data={'q': 'ac'})
-    __import__('ipdb').set_trace()
-
+    request = client.get(url)

@@ -1,5 +1,3 @@
-import os
-
 from threading import Thread
 
 from django.conf import settings
@@ -41,6 +39,8 @@ from planotrabalho.models import ConselhoCultural
 from planotrabalho.models import SituacoesArquivoPlano
 
 from gestao.utils import enviar_email_aprovacao_plano
+from adesao.models import Usuario, Cidade, Municipio, Historico
+from planotrabalho.models import PlanoTrabalho, CriacaoSistema, PlanoCultura, FundoCultura, OrgaoGestor, ConselhoCultural, SituacoesArquivoPlano
 
 from .forms import AlterarSituacao
 from .forms import DiligenciaForm
@@ -56,11 +56,13 @@ from .forms import AlterarConselhoForm
 from .forms import AlterarSistemaForm
 
 from dal import autocomplete
-
 # Acompanhamento das adesões
 
 
 class AlterarCadastrador(FormView):
+    """AlterarCadastrador
+    Altera o cadastrador de um Municipio aderido
+    """
     template_name = 'gestao/alterar_cadastrador.html'
     # form_class = AlterarCadastradorForm
     success_url = reverse_lazy('gestao:acompanhar_adesao')
@@ -71,6 +73,9 @@ class AlterarCadastrador(FormView):
 
 
 class AlterarCadastradorEstado(FormView):
+    """AlterarCadastradorEstado
+    Altera o cadastrador de um Estado aderido
+    """
     template_name = 'gestao/alterar_cadastrador_estado.html'
     # form_class = AlterarCadastradorForm
     success_url = reverse_lazy('gestao:acompanhar_adesao')
@@ -80,20 +85,12 @@ class AlterarCadastradorEstado(FormView):
         return super(AlterarCadastradorEstado, self).form_valid(form)
 
 
-# class MunicipioChain(ChainedSelectChoicesView):
-#     def get_choices(self):
-#         data = Cidade.objects.filter(uf=self.parent_value)
-#         choices = []
-#         for cidade in data:
-#             choices.append((str(cidade.id), cidade.nome_municipio))
-#         return choices
-
-class MunicipioAutoComplete(autocomplete.Select2QuerySetView):
+class MunicipioChain(autocomplete.Select2QuerySetView):
     def get_queryset(self):
-        qs = Cidade.objects.all()
-
-        if self.q:
-            qs = qs.filter()
+        choices = Cidade.objects\
+            .value_list('pk', 'nome_municipio')\
+            .filter(uf=self.parent_value)
+        return choices
 
 
 def alterar_situacao(request, id):

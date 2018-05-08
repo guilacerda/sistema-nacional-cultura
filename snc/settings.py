@@ -50,6 +50,7 @@ DJANGO_APPS = (
     # Admin
     'django.contrib.admin',
 )
+
 THIRD_PARTY_APPS = (
     'raven.contrib.django.raven_compat',
     'wkhtmltopdf',
@@ -65,7 +66,6 @@ THIRD_PARTY_APPS = (
     'rest_framework_csv',
     'corsheaders',
     'rest_framework_filters'
-    
 )
 
 # Apps specific for this project go here.

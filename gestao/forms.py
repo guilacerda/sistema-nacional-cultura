@@ -1,7 +1,4 @@
-from threading import Thread
-
 from django import forms
-from django.core.mail import send_mail
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.template.defaultfilters import filesizeformat
@@ -13,10 +10,9 @@ from planotrabalho.models import PlanoCultura, OrgaoGestor, ConselhoCultural
 from planotrabalho.models import SituacoesArquivoPlano
 from gestao.models import Diligencia
 
-from ckeditor.widgets import CKEditorWidget
+from dal import autocomplete
 
-# from clever_selects.form_fields import ChainedChoiceField
-# from clever_selects.forms import ChainedChoicesForm
+from ckeditor.widgets import CKEditorWidget
 
 from .utils import enviar_email_alteracao_situacao
 
